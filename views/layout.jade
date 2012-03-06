@@ -1,0 +1,16 @@
+!!! 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/common.js')
+    - if (title=="Master")
+      script(src='javascripts/socketMaster.js')
+    - else if (title=="Slave")
+      script(src='javascripts/socketSlave.js')
+    - else
+      script(src='javascripts/socketNeutral.js')
+  body!= body

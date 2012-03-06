@@ -1,0 +1,7 @@
+Log = function () {
+	
+};
+
+Log.prototype = {
+	
+};

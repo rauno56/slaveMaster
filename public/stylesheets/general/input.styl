@@ -1,0 +1,50 @@
+labelWidth = 105px;
+
+
+label {
+	width: labelWidth;
+	float: left;
+}
+
+input, textarea {
+	margin: 0;
+	padding: 0;
+	border: 1px solid hsla(0, 0%, 50%, 0.5);
+	border-radius(5px);
+	background-color: transparent;	
+}
+
+textarea {
+	width: 300px;
+	height: 150px;
+}
+
+input[type=number] {
+	background-color: transparent;
+	text-align: center;
+	width: 45px;
+}
+
+input[type=checkbox] {
+	position: relative;
+	top: 1px;
+	margin-right: 4px;
+	margin-bottom: 0;
+}
+
+input[type=color] {
+	font-size: 10px;
+	height: 16px;
+	line-height: 16px;
+	width: 125px;
+}
+
+input:focus, textarea:focus {
+	border: 1px solid hsla(0, 0%, 50%, 0.1);
+	box-glow();
+}
+
+.color {
+	width: 80px;
+	margin: 0px 5px;	
+}

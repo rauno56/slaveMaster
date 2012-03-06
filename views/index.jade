@@ -1,0 +1,9 @@
+header
+  div.wrapContent
+    h1= title
+div.wrapContent.field
+  - if (title=="Master")
+    div#rightContent
+      div
+        label(for="background-color") Background color:
+        input(type="color", name="background-color", value="transparent", title="")
