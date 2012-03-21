@@ -78,6 +78,24 @@ textarea:focus {
   width: 80px;
   margin: 0px 5px;
 }
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ccc;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(1, #ccc));
+  background: -webkit-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
+  background: -moz-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
+  background: -o-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
+  background: linear-gradient(top, #f2f2f2 0%, #ccc 100%);
+}
+body {
+  padding: 0;
+  margin: 0;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #262626;
+  background-repeat: no-repeat;
+}
 a {
   color: #262626;
   text-decoration: none;
@@ -90,24 +108,6 @@ a header:hover {
   -moz-box-shadow: 0px 6px 20px 2px #808080;
   box-shadow: 0px 6px 20px 2px #808080;
   -o-box-shadow: 0px 6px 20px 2px #808080;
-}
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #ccc;
-}
-body {
-  padding: 0;
-  margin: 0;
-  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #262626;
-  background-repeat: no-repeat;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(1, #ccc));
-  background: -webkit-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
-  background: -moz-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
-  background: -o-linear-gradient(top, #f2f2f2 0%, #ccc 100%);
-  background: linear-gradient(top, #f2f2f2 0%, #ccc 100%);
 }
 header {
   -webkit-box-shadow: 0px 8px 20px 10px rgba(26,26,26,0.50);
@@ -178,6 +178,7 @@ header h1 {
   margin: 5px 5px;
 }
 .node {
+  position: absolute;
   display: inline-block;
   margin: 20px;
   height: 100px;
@@ -187,4 +188,29 @@ header h1 {
 }
 #rightContent {
   margin-top: 20px;
+}
+#middleContent {
+  border: 1px solid #1a1a1a;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -o-border-radius: 3px;
+  border: 1px solid #808080;
+  -webkit-box-shadow: 0 0 13px 0 #000;
+  -moz-box-shadow: 0 0 13px 0 #000;
+  box-shadow: 0 0 13px 0 #000;
+  -o-box-shadow: 0 0 13px 0 #000;
+  margin: 0;
+  margin-top: 45px;
+  padding: 30px;
+  text-align: center;
+}
+#middleContent > div {
+  clear: both;
+  margin: 5px 5px;
+}
+.slaveId {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
 }

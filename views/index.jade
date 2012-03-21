@@ -1,9 +1,13 @@
 header
   div.wrapContent
     h1= title
-div.wrapContent.field
-  - if (title=="Master")
+- if (title=="Master")
+  div.wrapContent.field
     div#rightContent
       div
         label(for="background-color") Background color:
         input(type="color", name="background-color", value="transparent", title="")
+- else
+  div.wrapContent
+    div#middleContent
+      span.slaveId ID is yet unknown.

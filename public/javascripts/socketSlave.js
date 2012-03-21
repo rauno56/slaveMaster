@@ -33,6 +33,10 @@ Slave.prototype = {
 	setId: function (id) {
 		this.log("Set id: "+id);
 		this.id = id;
+		this.displayId();
+	},
+	displayId: function () {
+		$('.slaveId').html(this.id);
 	},
 	act: function (data, cb) {
 		this.log(data);
@@ -46,9 +50,10 @@ Slave.prototype = {
 	},
 	color: function (to) {
 		console.log("change background color to",to);
+		$('html').css('background', "none");
 		$('html').css('background-color', to);
 	}
 };
 
 var slave = new Slave(),
-	master = io.connect('http://localhost/master');
+	master = io.connect('/master');

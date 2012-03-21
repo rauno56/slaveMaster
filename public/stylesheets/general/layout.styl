@@ -1,13 +1,19 @@
-content-box() {
-	> div {
-		clear: both;
-		margin: 5px 5px;
-	}
-	border: 1px solid hsl(0, 0%, 10%);
-	border-radius 3px;	
-	border: 1px solid hsl(0, 0%, 50%, 0.7);
-	box-shadow 0 0 13px 0 #000000;
-	margin: 0;
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+	
+	background-color: rgb(204, 204, 204);
+	background: linear-gradient(top, rgb(242, 242, 242), rgb(204, 204, 204));
+}
+
+body {
+	padding: 0;
+	margin: 0; 
+	font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+    
+	color: hsl(0, 0%, 15%);
+    background-repeat: no-repeat;
 }
 
 a {
@@ -19,24 +25,6 @@ a {
 	}
 	color: hsl(0, 0%, 15%);
   	text-decoration:  none;
-}
-
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-	
-	background-color: rgb(204, 204, 204);
-}
-
-body {
-	padding: 0;
-	margin: 0; 
-	font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-    
-	color: hsl(0, 0%, 15%);
-    background-repeat: no-repeat;
-	background: linear-gradient(top, rgb(242, 242, 242), rgb(204, 204, 204));
 }
 
 header {
@@ -53,24 +41,4 @@ header {
 	background-color: transparent;
 	margin-top: 10px;
 	padding: 0;
-}
-
-#contentWrapper {
-	margin: 0 auto;
-	width: 1000px;
-}
-
-.wrapContent {
-	margin: 0 auto;
-	width: 1000px;
-}
-
-
-#leftContent {
-	content-box();
-	float: left;
-}
-#rightContent {
-	content-box();
-	float: right;
 }

@@ -13,8 +13,6 @@ var PORT = process.env['app_port'] || 3000,
 
 io.configure(function () {
 	io.set('log level', 1);
-	io.set("transports", ["xhr-polling"]); 
-	io.set("polling duration", 10); 
 });
 
 
@@ -50,23 +48,45 @@ var genId = function () {
 	return 's'+Math.floor(Math.random()*1000);
 };
 
+var maintain = function () {
+	console.log("Maintaining...");
+	console.log(slaves);
+	var sockets = io.of('/slave').sockets;
+//	console.log(sockets);
+	for (var i in slaves) {
+//		console.log('maintaining',i);
+		var slave = slaves[i]
+		if (!sockets[slave.socket]) {
+			if (++slave.ticks >= 3) {
+				console.log("removed", i);
+				slaves[i] = null;
+				delete slaves[i];	
+			} else {
+				console.log("ticked", i, "which has now",slave.ticks,"ticks.");
+			}
+		}
+	}
+}
+
 var getSocket = function (id) {
-	return sockets[id] || null;
+	return io.of('/slave').sockets[slaves[id].socket] || null;
 };
 
-var sockets = {},
-	slaves = {};
+var slaves = {};
 
 var regSlave = function (socket, id) {
 	if (!id) {
-		console.log('New slave.');
+		console.log('New slave.', socket.id);
 		id = genId();
 		obj = {};
 		obj[id] =  {color: 'white' };
 		io.of('/master').emit('slaves', obj);
 	}
-	sockets[id] = socket;
-	slaves[id] = { color: 'white' };
+	slaves[id] = {
+		socket: socket.id,
+		color: 'white',
+		ticks: 0
+	};
 	socket.set('slaveId', id, function (a,b,c) {
 //		console.log('setting slaveId',a);
 	});
@@ -75,6 +95,9 @@ var regSlave = function (socket, id) {
 
 io.of('/slave').on('connection', function (socket) {
 	socket.on('slave', function (data, cb) {
+		
+		maintain();
+		
 		if (data.code) {
 			if (data.code=='reg') {
 				var id = regSlave(socket, data.slaveId);
@@ -89,8 +112,10 @@ io.of('/slave').on('connection', function (socket) {
 				});
 			} 
 		} else {
-			console.log(data);	
+			console.log("w/o code", data);
 		}
+
+		io.of('/master').emit('slaves', slaves);
 	});
 	
 	socket.on('disconnect', function () {
@@ -99,6 +124,8 @@ io.of('/slave').on('connection', function (socket) {
 });
 
 io.of('/master').on('connection', function (socket) {
+	maintain();
+	
 	socket.emit('slaves', slaves);
 	
 	socket.on('yell', function (data, cb) {
@@ -106,11 +133,13 @@ io.of('/master').on('connection', function (socket) {
 		console.log("Master commanded all slaves: ", data, !!cb);
 	});
 	socket.on('command', function (data, cb) {
-		var slaves, slave;
-		if (data && (slaves = data.slaves)) {
-			for (var i = 0; i<slaves.length; i++) {
-				if (slave = getSocket(slaves[i])) {
+		var slave;
+		if (data && (ordered = data.slaves)) {
+			for (var i = 0; i<ordered.length; i++) {
+				if (slave = getSocket(ordered[i])) {
 					slave.emit('command', data.command);
+				} else {
+					console.log("Error. Commanded slave not found.", ordered[i]);
 				}
 			}
 		}
