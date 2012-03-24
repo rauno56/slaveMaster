@@ -12,6 +12,9 @@ var PORT = process.env['app_port'] || process.env['PORT'] || 3000,
 //Socket.IO configuration
 
 io.configure(function () {
+	  io.set("transports", ["xhr-polling"]); 
+	  io.set("polling duration", 10); 
+	  
 	io.set('log level', 1);
 });
 
@@ -148,5 +151,5 @@ io.of('/master').on('connection', function (socket) {
 });
 
 app.listen(PORT);
-console.log(PORT);
+console.log(env);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
