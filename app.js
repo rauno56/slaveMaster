@@ -57,7 +57,7 @@ var maintain = function () {
 //		console.log('maintaining',i);
 		var slave = slaves[i]
 		if (!sockets[slave.socket]) {
-			if (++slave.ticks >= 3) {
+			if (++slave.ticks >= 5) {
 				console.log("removed", i);
 				slaves[i] = null;
 				delete slaves[i];	
@@ -148,4 +148,5 @@ io.of('/master').on('connection', function (socket) {
 });
 
 app.listen(PORT);
+console.log(app.address());
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

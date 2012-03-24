@@ -1,0 +1,31 @@
+content-box() {
+	> div {
+		clear: both;
+		margin: 5px 5px;
+	}
+	border: 1px solid hsl(0, 0%, 10%);
+	border-radius 3px;	
+	border: 1px solid hsl(0, 0%, 50%, 0.7);
+	box-shadow 0 0 13px 0 #000000;
+	margin: 0;
+}
+
+#contentWrapper {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+.wrapContent {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+
+#leftContent {
+	content-box();
+	float: left;
+}
+#rightContent {
+	content-box();
+	float: right;
+}
