@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var PORT = process.env['app_port'] || process.env['port'] || 3000,
+var PORT = process.env['app_port'] || process.env['PORT'] || 3000,
 	express = require('express'),
 	routes = require('./routes'),
 	app = module.exports = express.createServer(),
@@ -148,5 +148,5 @@ io.of('/master').on('connection', function (socket) {
 });
 
 app.listen(PORT);
-console.log(app.address());
+console.log(PORT);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
