@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var PORT = process.env['app_port'] || 3000,
+var PORT = process.env['app_port'] || process.env['port'] || 3000,
 	express = require('express'),
 	routes = require('./routes'),
 	app = module.exports = express.createServer(),
