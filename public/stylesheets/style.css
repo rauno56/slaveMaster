@@ -178,7 +178,7 @@ header h1 {
   margin: 5px 5px;
 }
 .node {
-  position: absolute;
+  position: relative;
   display: inline-block;
   margin: 20px;
   height: 100px;

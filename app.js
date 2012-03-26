@@ -15,7 +15,7 @@ io.configure(function () {
 	io.set("transports", ["xhr-polling"]);
 	io.set("polling duration", 10); 
 	  
-	io.set('log level', 1);
+	io.set('log level', 2);
 });
 
 
@@ -60,13 +60,15 @@ var maintain = function () {
 //		console.log('maintaining',i);
 		var slave = slaves[i]
 		if (!sockets[slave.socket]) {
-			if (++slave.ticks >= 5) {
+			if (++slave.ticks >= 2) {
 				console.log("removed", i);
 				slaves[i] = null;
 				delete slaves[i];	
 			} else {
 				console.log("ticked", i, "which has now",slave.ticks,"ticks.");
 			}
+		} else {
+			slave.ticks = 0;
 		}
 	}
 }
@@ -83,7 +85,7 @@ var regSlave = function (socket, id) {
 		id = genId();
 		obj = {};
 		obj[id] =  {color: 'white' };
-		io.of('/master').emit('slaves', obj);
+//		io.of('/master').emit('slaves', obj);
 	}
 	slaves[id] = {
 		socket: socket.id,
@@ -151,5 +153,4 @@ io.of('/master').on('connection', function (socket) {
 });
 
 app.listen(PORT);
-console.log(process.env);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

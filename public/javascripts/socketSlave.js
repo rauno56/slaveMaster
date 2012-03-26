@@ -2,6 +2,7 @@ var Slave = function () {
 	var me = this;
 	
 	var socket = me.socket = io.connect('/slave'); 
+
 	
 	socket.on('connect', (function () {
 		this.log('connection established');
